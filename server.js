@@ -16,9 +16,9 @@ app.use(morgan('dev'))
 app.use(helmet())
 
 //Routers
-// app.use('/auth', authRouter)
+app.use('/auth', authRouter)
 app.use('/blogs', blogsRouter)
-// app.use('/users', usersRouter)
+app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
     res.status(200).json({message: "Welcome"})
