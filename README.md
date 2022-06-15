@@ -14,10 +14,6 @@ To run this API the following environment vaariables are required:
 MONGODB_URI
 SECRET_KEY
 
-### Run Locally
-
-To run locally clone the following GitHub link and install the following dependecies.
-
 ### Endpoints
 
 - /auth
