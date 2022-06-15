@@ -1,11 +1,13 @@
 const express = require('express')
 const BlogsModel = require('../models/blogsSchema')
+const authMiddleware = require('../middleware/authMiddleware')
+
 
 //Create a Router
 const router = express.Router()
 
 //Get Blogs
-router.get('/', async(req, res) => {
+router.get('/',authMiddleware, async(req, res) => {
     try {
         const blogs = await BlogsModel.find()
         res.status(200).json(blogs)
@@ -16,11 +18,12 @@ router.get('/', async(req, res) => {
 })
 
 //Create Blogs
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     const blogsData = req.body //gets the data from the request
     console.log(blogsData);
     try {
-        const blog = await BlogsModel.create(blogsData)//create the blog in the db
+        const blog = await BlogsModel.create(blogsData)
+        //create the blog in the db
         //send back the response
         res.status(201).json(blog)
     } catch (error) {
@@ -33,7 +36,7 @@ router.post('/', async (req, res) => {
 
     //Get Blog by ID
 
-    router.get('/:id', async(req, res) => {
+    router.get('/:id',authMiddleware, async(req, res) => {
         const id = req.params.id
         console.log(id)
 
@@ -50,7 +53,7 @@ router.post('/', async (req, res) => {
     })
 
     //Update Blog By ID
-    router.put('/:id', async(req, res) => {
+    router.put('/:id', authMiddleware, async(req, res) => {
         const id = req.params.id
         const newBlogsData = req.body
         try {
@@ -64,7 +67,7 @@ router.post('/', async (req, res) => {
     })
 
     //Delete a Blog
-    router.delete('/:id', async (req, res) => {
+    router.delete('/:id', authMiddleware, async (req, res) => {
         const id = req.params.id
         try {
             const blog = await BlogsModel.findByIdAndDelete(id)
