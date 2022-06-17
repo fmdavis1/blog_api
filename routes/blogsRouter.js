@@ -95,7 +95,7 @@ router.post('/', authMiddleware, async (req, res) => {
                 return res.status(400).json({msg:'Not Authorized!'})
             }
 
-            // if they are the same ID's we delete itconst blog
+            // if they are the same ID's we delete it const blog
             const blog = await BlogsModel.findByIdAndDelete(id)
             res.status(200).json({msg:'Blog was deleted!'})
         } catch (error) {
