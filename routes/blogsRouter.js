@@ -10,6 +10,17 @@ const router = express.Router()
 router.get('/',authMiddleware, async(req, res) => {
     try {
         const blogs = await BlogsModel.find()
+
+        res.status(200).json(blogs)
+    } catch (error) {
+           console.log(error)
+        
+    }
+})
+router.get('/private',authMiddleware, async(req, res) => {
+    try {
+        const blogs = await BlogsModel.find({private: true})
+
         res.status(200).json(blogs)
     } catch (error) {
            console.log(error)
@@ -20,6 +31,7 @@ router.get('/',authMiddleware, async(req, res) => {
 //Create Blogs
 router.post('/', authMiddleware, async (req, res) => {
     const blogsData = req.body //gets the data from the request
+    blogsData.user = req.user.id
     console.log(blogsData);
     try {
         const blog = await BlogsModel.create(blogsData)
@@ -69,7 +81,21 @@ router.post('/', authMiddleware, async (req, res) => {
     //Delete a Blog
     router.delete('/:id', authMiddleware, async (req, res) => {
         const id = req.params.id
+        console.log('FROM DELETE', req.user)
         try {
+            //first we find the blog we're going to delete
+            const blogToDelete = await BlogsModel.findById(id)
+            console.log(blogToDelete)
+            console.log(blogToDelete.user._id.toString(),'||', req.user.id)
+            //Here we check that the user who created the blog is the one asking to delete the blog
+            //By checing the ID's
+
+            if(blogToDelete.user._id.toString() !== req.user.id){
+                //if they are NOT the same we send error message
+                return res.status(400).json({msg:'Not Authorized!'})
+            }
+
+            // if they are the same ID's we delete itconst blog
             const blog = await BlogsModel.findByIdAndDelete(id)
             res.status(200).json({msg:'Blog was deleted!'})
         } catch (error) {

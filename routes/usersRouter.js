@@ -59,10 +59,6 @@ try {
     
 }
 
-// const errors = validationResult(req)
-// //Checks for validation errors
-// if(!errors.isEmpty(){
-//     return res.json(errors.array())
 }
 )
 
