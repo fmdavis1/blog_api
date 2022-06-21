@@ -7,6 +7,8 @@ This is a blog API with full Create, Read, Update, and Delete(CRUD) functionalit
 
 - Server: Node.js, Express.js
 - Database: MongoDB
+- Frontend: Postman
+- Deploy: Postman
 
 ### ENVIONMENT VARIABLES
 To run this API the following environment vaariables are required:
@@ -51,8 +53,15 @@ git clone https://github.com/fmdavis1/blog_api
 
 - usersRouter.post('/users')Registers users, usersSchema is used. Password is hashed. Token sent to headers for further access.
 - /users
-        - Registration
-            - CREATE
+        - CREATE
+            - Registration
+        - READ
+            - Get users
+        - UPDATE
+            - Update user
+        - DELETE
+            - Delete user
+        
 
 Blog('/blogs')
 router.get('/blogs'): all public blog and private blogs are included, must be logged in and have a token.
@@ -102,3 +111,6 @@ router.delete('/blogs/:id): Deletes blog associated with id, need a token for Au
 - birthday:date,required:true,
 - age:number,
 - password:String:required:true
+
+### Deploy
+- Deployed to Heroku

@@ -8,6 +8,17 @@ const jwt = require('jsonwebtoken')
 //Create a Router
 const router = express.Router()
 
+//Get Users
+router.get('/', async (req, res) => {
+    try {
+        const users = await UserModel.find()
+        res.status(200).json(users)
+    } catch (error) {
+        console.log(error)
+        
+    }
+})
+
 //Create or Register a new User
 router.post('/',[
     check('username', "Username is required from Middleware!").notEmpty(),
@@ -59,7 +70,36 @@ try {
     
 }
 
-}
-)
+})
+
+//Update User By Id
+router.put('/:id', async(req, res) => {
+    const id = req.params.id
+    newUsersData = req.body
+    try {
+        //find the user by id
+        const user = await UserModel.findByIdAndUpdate(id, newUsersData, {new: true})
+        res.status(202).json(user)
+        console.log(user)
+    } catch (error){
+        console.log(error)
+
+    } 
+        
+    })
+
+    //Delete a User
+    router.delete('/:id', async(req, res) => {
+        const id = req.params.id
+        console.log('FROM DELETE', req.user)
+        try{
+            //first we find the user we're going to delete
+            const user = await UserModel.findByIdAndDelete(id)
+            res.status(200).json({msg:'user was deleted!'})
+            
+        }catch(error){
+            console.log(error)
+        }
+    })
 
 module.exports = router
