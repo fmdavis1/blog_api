@@ -11,12 +11,12 @@ const blogSchema = mongoose.Schema({
         default: Date.now
     },
 
-    blog_title:{
+    blogs_title:{
         type: String,
         required: true
     },
 
-    blog_content:{
+    blogs_content:{
         type: String,
         required: true
     },
@@ -24,7 +24,7 @@ const blogSchema = mongoose.Schema({
      private: {
          type: Boolean,
          default: false,
-         required: true
+        //  required: true
      },
 
      user: {

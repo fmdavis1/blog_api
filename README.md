@@ -8,7 +8,7 @@ This is a blog API with full Create, Read, Update, and Delete(CRUD) functionalit
 - Server: Node.js, Express.js
 - Database: MongoDB
 - Frontend: Postman
-- Deploy: Postman
+- Deploy: Heroku
 
 ### ENVIONMENT VARIABLES
 To run this API the following environment vaariables are required:
@@ -20,8 +20,6 @@ To run this API the following environment vaariables are required:
 Clone the project and follow all steps and have all dependencies to run the project locally.
 
 git clone https://github.com/fmdavis1/blog_api
-
-### Go to project directory
 
 ### Install dependencies
 
@@ -92,11 +90,6 @@ router.delete('/blogs/:id): Deletes blog associated with id, need a token for Au
             -Delete blog
 
 ### SCHEMAS
-
-### Auth Schema:
-- email:type:String:required:true,
-- password:type:String:required:true
-
 
 ###  Blog Schema:
 - username: type: String, required: true
